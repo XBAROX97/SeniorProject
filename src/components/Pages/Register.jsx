@@ -1,130 +1,162 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import backgroundImage from './../../assets/backgroundImage.jpg';
-
+import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
+import { toast } from 'react-hot-toast'
+import useAuth from '../../hooks/useAuth'
+import backgroundImage from './../../assets/backgroundImage.jpg'
 const Register = () => {
+  const { register, loading } = useAuth();
 
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [displayName, setDisplayName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [registerForm, setRegisterForm] = useState({
+    firstName: '',
+    lastName: '',
+    displayName: '',
+    email: '',
+    password: '',
+    password2: ''
+  })
 
+  const handleChange = (e) => {
+    setRegisterForm({
+      ...registerForm,
+      [e.target.name]: e.target.value
+    })
+  }
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(firstName);
-    console.log(lastName);
-    console.log(displayName);
-    console.log(email);
+    // Check if password == password2
+    if (registerForm.password !== registerForm.password2) {
+      toast.error((t) => (
+        <div className='flex items-center gap-2 cursor-pointer select-none' onClick={() => toast.dismiss(t.id)}>
+          <p className='text-semibold text-md'>Passowrd doesn't match!</p>
+        </div>
+      ));
+      return;
+    }
+    register(registerForm);
   };
-  return (
-    <div
-      className="flex h-screen bg-cover"
-      style={{ backgroundImage: `url(${backgroundImage})` }} >
-      <div className="m-auto container">
-        <div className="flex justify-center">
-          <div className="w-full lg:w-3/4 xl:w-1/2 bg-white rounded-lg lg:rounded-l-none">
-            <h3 className="pt-4 text-2xl text-center">Register</h3>
-            <form onSubmit={handleSubmit} className="px-8 pt-6 pb-8 mb-4 bg-white rounded">
-              <div className='flex'>
-                <div className="flex-1 mr-4">
-                  <label className="block mb-2 text-lg font-bold text-gray-700" htmlFor="firstName" >
-                    First Name
-                  </label>
-                  <input
-                    className="w-full px-3 py-2 text-lg leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
-                    id="firstName"
-                    type="text"
-                    placeholder="First Name"
-                    value={firstName}
 
-                    onChange={(event) => setFirstName(event.target.value)}
-                  />
-                </div>
-                <div className="flex-1">
-                  <label className="block mb-2 text-lg font-bold text-gray-700" htmlFor="lastName" >
-                    Last Name
-                  </label>
-                  <input
-                    className="w-full px-3 py-2 text-lg leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
-                    id="lastName"
-                    type="text"
-                    placeholder="Last Name"
-                    value={lastName}
-                    onChange={(event) => setLastName(event.target.value)}
-                  />
-                </div>
-              </div>
-              <div className="mb-4">
-                <label className="block mb-2 text-lg font-bold text-gray-700" htmlFor="displayName" >
-                  Display Name
-                </label>
-                <input
-                  className="w-full px-3 py-2 text-lg leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
-                  id="displayName"
-                  type="text"
-                  placeholder="Display Name"
-                  value={displayName}
-                  onChange={(event) => setDisplayName(event.target.value)}
-                />
-              </div>
-              <div className="mb-4">
-                <label className="block mb-2 text-lg font-bold text-gray-700" htmlFor="email" >
-                  Email Address
-                </label>
-                <input
-                  className="w-full px-3 py-2 text-lg leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
-                  id="email"
-                  type="email"
-                  value={email}
-                  placeholder="Email Address"
-                  onChange={(event) => setEmail(event.target.value)}
-                />
-              </div>
-              <div className="mb-4">
-                <label className="block mb-2 text-lg font-bold text-gray-700" htmlFor="password" >
-                  Password
-                </label>
-                <input
-                  className="w-full px-3 py-2 text-lg leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
-                  id="password"
-                  type="password"
-                  placeholder="Password"
-                  value={password}
-                  onChange={(event) => setPassword(event.target.value)}
-                />
-              </div>
-              <div className="mb-4">
-                <label className="block mb-2 text-lg font-bold text-gray-700" htmlFor="confirmPassword">
-                  Confirm Password
-                </label>
-                <input
-                  className="w-full px-3 py-2 text-lg leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
-                  id="confirmPassword"
-                  type="password"
-                  placeholder="Confirm Password"
-                />
-              </div>
-              <div className="mb-6 text-center">
-                <button
-                  className="w-full px-4 py-2 font-bold text-white bg-blue-500 rounded-full hover:bg-blue-700 focus:outline-none focus:shadow-outline"
-                  type="submit"
-                > Create Account
-                </button>
-                <div className="text-center">
-                  <h1 className="inline-block text-blue-500 align-baseline text-lg">
-                    Already have an account?{' '}
-                    <span className='text-2xl text-red-400 hover:text-red-800 focus:outline-none'>
-                      <Link to="/">Login!</Link>
-                    </span>
-                  </h1>
-                </div>
-              </div>
-            </form>
+  return (
+    <div className="relative flex h-screen">
+      <div className="absolute inset-0 z-0">
+        <img className="w-full h-full object-cover" src={backgroundImage} alt="Background" />
+        <div className="absolute inset-0 bg-black opacity-60"></div>
+      </div>
+
+      <form onSubmit={handleSubmit} className="relative z-10 m-auto bg-white bg-opacity-90 container p-8 max-w-[800px] shadow rounded-lg flex flex-col gap-4">
+        <h2 className="text-2xl font-bold mb-4">Register</h2>
+
+        <div className="flex flex-wrap gap-2">
+          <div className="flex-1">
+            <label className="block text-gray-700 font-bold" htmlFor="firstName">
+              First Name
+            </label>
+            <input
+              className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              id="firstName"
+              name="firstName"
+              type="text"
+              placeholder="Enter your first name"
+              value={registerForm.firstName}
+              onChange={handleChange}
+            />
+          </div>
+          <div className="flex-1">
+            <label className="block text-gray-700 font-bold" htmlFor="lastName">
+              Last Name
+            </label>
+            <input
+              className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              id="lastName"
+              name="lastName"
+              type="text"
+              placeholder="Enter your last name"
+              value={registerForm.lastName}
+              onChange={handleChange}
+            />
           </div>
         </div>
-      </div>
+
+        <div>
+          <label className="block text-gray-700 font-bold mb-2" htmlFor="displayName">
+            Display Name
+          </label>
+          <input
+            className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            id="displayName"
+            name="displayName"
+            type="text"
+            placeholder="Enter your display name"
+            value={registerForm.displayName}
+            onChange={handleChange}
+          />
+        </div>
+
+        <div>
+          <label className="block text-gray-700 font-bold mb-2" htmlFor="email">
+            Email
+          </label>
+          <input
+            className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            id="email"
+            name="email"
+            type="email"
+            placeholder="Enter your email address"
+            value={registerForm.email}
+            onChange={handleChange}
+          />
+        </div>
+
+        <div>
+          <label className="block text-gray-700 font-bold mb-2" htmlFor="password">
+            Password
+          </label>
+          <input
+            className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            id="password"
+            name="password"
+            type="password"
+            placeholder="Enter your password"
+            value={registerForm.password}
+            onChange={handleChange}
+          />
+        </div>
+
+        <div>
+          <label className="block text-gray-700 font-bold mb-2" htmlFor="password">
+            Confirm Password
+          </label>
+          <input
+            className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            id="password2"
+            name="password2"
+            type="password"
+            placeholder="Confirm your password"
+            value={registerForm.password2}
+            onChange={handleChange}
+          />
+        </div>
+
+        <div className='mt-3'>
+          {loading
+            ? <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline flex items-center gap-2" type="button" disabled>
+              <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24">
+                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path>
+              </svg>
+              Registering...
+            </button>
+            : <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
+              Register
+            </button>
+          }
+        </div>
+
+        <div>
+          Already have an account? <Link to="/login" className="text-blue-500">Log in</Link>
+        </div>
+      </form>
     </div>
   );
 };
+
 export default Register;
