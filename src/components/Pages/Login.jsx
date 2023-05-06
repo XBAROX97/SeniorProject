@@ -1,95 +1,82 @@
-import React,{useState,useEffect} from 'react'
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import backgroundImage from './../../assets/backgroundImage.jpg'
-
-
+import backgroundImage from './../../assets/backgroundImage.jpg';
 
 const Login = () => {
-    const [email, setEmail] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Add logic to handle form submission here
+  };
 
   return (
-    <div
-      className="flex h-screen bg-cover"
-      style={{ backgroundImage: `url(${backgroundImage})` }}
-    >
-      <div className="m-auto container">
-        <div className="flex justify-center">
-          <div className="w-full lg:w-3/4 xl:w-1/2 bg-white rounded-lg lg:rounded-l-none">
-            <h3 className="pt-4 text-2xl text-center">Welcome Back!</h3>
-            <form className="px-8 pt-6 pb-8 mb-4 bg-white rounded">
-              <div className="mb-4">
-                <label
-                  className="block mb-2 text-lg font-bold text-gray-700"
-                  htmlFor="username"
-                >
-                  Username
-                </label>
-                <input
-                  className="w-full px-3 py-2 text-lg leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
-                  id="username"
-                  type="text"
-                  placeholder="Username"
-                />
-              </div>
-              <div className="mb-4">
-                <label
-                  className="block mb-2 text-sm font-bold text-gray-700"
-                  htmlFor="password"
-                >
-                  Password
-                </label>
-                <input
-                  className="w-full px-3 py-2 mb-3 text-sm leading-tight text-gray-700 border border-red-500 rounded shadow appearance-none focus:outline-none focus:shadow-outline"
-                  id="password"
-                  type="password"
-                  placeholder="******************"
-                />
-                <p className="text-xs italic text-red-500">
-                  Please choose a password.
-                </p>
-              </div>
-              <div className="mb-4">
-                <input
-                  className="mr-2 leading-tight"
-                  type="checkbox"
-                  id="checkbox_id"
-                />
-                <label className="text-sm" htmlFor="checkbox_id">
-                  Remember Me
-                </label>
-              </div>
-              <div className="mb-6 text-center">
-                <Link to="/home" className="w-full flex justify-centernp px-4 py-2 font-bold text-white bg-blue-500 rounded-full hover:bg-blue-700 focus:outline-none focus:shadow-outline">
-                Sign In
-                </Link>
-              </div>
-              <hr className="mb-6 border-t" />
-              <div className="text-center">
-                <a
-                  className="inline-block text-sm text-blue-500 align-baseline hover:text-blue-800"
-                  href="#"
-                >
-                  <Link to="/register">
-                  Create an Account!
-                  </Link>
-                </a>
-              </div>
-              <div className="text-center">
-                <a
-                  className="inline-block text-sm text-blue-500 align-baseline hover:text-blue-800"
-                  href="#"
-                >
-                  Forgot Password?
-                </a>
-              </div>
-            </form>
+    <div className="min-h-screen bg-cover flex items-center" style={{ backgroundImage: `url(${backgroundImage})` }}>
+      <div className="mx-auto w-full max-w-md p-8 bg-white rounded-lg shadow-lg">
+        <h2 className="text-3xl font-bold text-center mb-4">Welcome Back!</h2>
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <div className="space-y-1">
+            <label htmlFor="email" className="block text-lg font-medium text-gray-700">
+              Email
+            </label>
+            <input
+              id="email"
+              type="email"
+              className="block w-full border-gray-300 rounded-md shadow-sm py-2 px-3 text-lg placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+              placeholder="you@example.com"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
           </div>
+          <div className="space-y-1">
+            <label htmlFor="password" className="block text-lg font-medium text-gray-700">
+              Password
+            </label>
+            <input
+              id="password"
+              type="password"
+              className="block w-full border-gray-300 rounded-md shadow-sm py-2 px-3 text-lg placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+              placeholder="**********"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </div>
+          <div className="flex items-center justify-between">
+            <div className="flex items-center">
+              <input
+                id="remember-me"
+                type="checkbox"
+                className="h-4 w-4 text-blue-500 focus:ring-blue-400 border-gray-300 rounded"
+              />
+              <label htmlFor="remember-me" className="ml-2 block text-lg text-gray-700">
+                Remember me
+              </label>
+            </div>
+            <div className="text-sm">
+              <Link to="/home" className="font-medium text-blue-500 hover:text-blue-700">
+                Forgot your password?
+              </Link>
+            </div>
+          </div>
+          <div>
+            <button
+              type="submit"
+              className="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-lg font-medium text-white bg-blue-500 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+            >
+              Sign In
+            </button>
+          </div>
+        </form>
+        <div className="mt-4 text-center">
+          <span className="text-lg text-gray-600">Don't have an account yet?</span>{' '}
+          <Link to="/register" className="font-medium text-blue-500 hover:text-blue-700">
+            Sign up
+          </Link>
         </div>
       </div>
     </div>
   );
-}
+};
 
-export default Login
+export default Login;

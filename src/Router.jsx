@@ -23,6 +23,11 @@ import Register from "./components/Pages/Register";
           errorElement: <ErrorPages/>,
         },
         {
+          path: "/login",
+          element: <Login/>,
+          errorElement: <ErrorPages/>,
+        },
+        {
             path: "/register",
             element: <Register/>,
             errorElement: <ErrorPages/>,
