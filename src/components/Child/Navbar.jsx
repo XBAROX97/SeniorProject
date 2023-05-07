@@ -17,9 +17,9 @@ const Navbar = () => {
       <div className="flex items-center">
         <h1 className="text-slate-800 font-bold text-lg">ChateMate</h1>
       </div>
-      <h1>{console.log("nav:" +currentUser)}</h1>
+      <h1 className="text-slate-800 font-bold text-lg">{currentUser.displayName}</h1>
       <div className="relative flex items-center gap-3">
-       
+
         <img
           className="w-8 h-8 rounded-full object-cover cursor-pointer"
           src={currentUser.photoURL}

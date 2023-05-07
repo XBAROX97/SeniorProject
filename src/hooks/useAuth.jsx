@@ -3,6 +3,7 @@ import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { storage,auth, db, createUserWithEmailAndPassword, updateProfile, setDoc, doc } from "../FireBase";
+import { signInWithEmailAndPassword } from "firebase/auth";
 
 const useAuth = () => {
     const navigate = useNavigate();
@@ -61,17 +62,17 @@ const useAuth = () => {
         );
       };
     
-    // const login = async (email, password) => {
-    //     try {
-    //         const userCredential = await auth.signInWithEmailAndPassword(email, password);
-    //         const userDoc = await firestore.collection('users').doc(userCredential.user.uid).get();
-    //         const user = userDoc.data();
-    //         setCurrentUser(user);
-    //         toast.success('Login successful!');
-    //     } catch (error) {
-    //         toast.error(`Login failed: ${error.message}`);
-    //     }
-    // };
+    const login = async (email, password) => {
+        try {
+            const userCredential = await auth.signInWithEmailAndPassword(email, password);
+            const userDoc = await firestore.collection('users').doc(userCredential.user.uid).get();
+            const user = userDoc.data();
+            setCurrentUser(user);
+            toast.success('Login successful!');
+        } catch (error) {
+            toast.error(`Login failed: ${error.message}`);
+        }
+    };
 
     const logout = async () => {
         try {

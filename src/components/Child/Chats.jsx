@@ -1,6 +1,32 @@
+import { doc, onSnapshot } from "firebase/firestore";
+import React, { useContext, useEffect, useState } from "react";
+import { AuthContext } from "../../hooks/AuthContext";
+import { db } from "../../FireBase";
+import { ChatContext } from "../../hooks/ChatContext";
+
 const message = "Hello sd sa ds dsa das ad adsa das dsa dsa a dsa dsa da asd asd adsa dsa dsa dsa dsa ada dsa dsa"
 
 const Chats = () => {
+  const [chats, setChats] = useState([]);
+
+  const { currentUser } = useContext(AuthContext);
+  const { dispatch } = useContext(ChatContext);
+
+  useEffect(() => {
+    const getChats = () => {
+      const unsub = onSnapshot(doc(db, "userChats", currentUser.uid), (doc) => {
+        setChats(doc.data());
+      });
+
+      return () => {
+        unsub();
+      };
+    };
+
+    currentUser.uid && getChats();
+  }, [currentUser.uid]);
+
+
   return (
     <div className='overflow-hidden hover:overflow-y-scroll w-full' tabIndex={1}>
       {/* Load chats */}
