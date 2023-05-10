@@ -10,9 +10,7 @@ import {
 import { db, storage } from "../../FireBase";
 import { v4 as uuid } from "uuid";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
-import { FcAddImage, } from "react-icons/fc";
-import { FiSmile, } from "react-icons/fi";
-
+import { FcAddImage } from "react-icons/fc";
 
 const Input = () => {
   const [text, setText] = useState("");
@@ -29,9 +27,11 @@ const Input = () => {
 
       uploadTask.on(
         (error) => {
-          //TODO:Handle Error
+          // TODO: Handle Error
         },
         () => {
+          setText("");
+          setImg(null);
           getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
             await updateDoc(doc(db, "chats", data.chatId), {
               messages: arrayUnion({
@@ -46,6 +46,7 @@ const Input = () => {
         }
       );
     } else {
+      setText("");
       await updateDoc(doc(db, "chats", data.chatId), {
         messages: arrayUnion({
           id: uuid(),
@@ -69,9 +70,6 @@ const Input = () => {
       },
       [data.chatId + ".date"]: serverTimestamp(),
     });
-
-    setText("");
-    setImg(null);
   };
 
   return (
@@ -85,7 +83,7 @@ const Input = () => {
         aria-label="Type something"
       />
       <div className="flex items-center">
-        <label htmlFor="image-upload" className="mr-2">
+        <label htmlFor="image-upload" className="mr-2 cursor-pointer">
           <FcAddImage className="h-10 w-10" />
         </label>
         <input
