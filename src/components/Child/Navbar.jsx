@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react'
 import { signOut } from "firebase/auth"
 import { auth } from '../../FireBase';
 import { AuthContext } from '../../hooks/AuthContext';
+import { Link } from 'react-router-dom';
 
 
 const Navbar = () => {
@@ -28,10 +29,12 @@ const Navbar = () => {
         />
         {isMenuOpen && (
           <div className="absolute right-0 top-10 z-10 bg-white rounded-md shadow-lg py-2">
+            <Link to="/login">
             <button className="block w-full px-4 py-2 text-gray-800 hover:bg-gray-200"
               onClick={() => signOut(auth)}>
               Logout
             </button>
+            </Link>
           </div>
         )}
       </div>
