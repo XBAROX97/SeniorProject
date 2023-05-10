@@ -20,7 +20,8 @@ const Input = () => {
   const { currentUser } = useContext(AuthContext);
   const { data } = useContext(ChatContext);
 
-  const handleSend = async () => {
+  const handleSend = async (e) => {
+    e.preventDefault();
     if (img) {
       const storageRef = ref(storage, uuid());
 
@@ -74,39 +75,37 @@ const Input = () => {
   };
 
   return (
-    <div className="flex items-center justify-between bg-gray-100 h-16 px-4 rounded-lg border border-gray-400">
-    <input
-      type="text"
-      placeholder="Type something..."
-      className="flex-grow px-3 py-2 bg-transparent focus:outline-none focus:ring-2 focus:ring-blue-300 rounded-lg border border-gray-400"
-      value={text}
-      onChange={(e) => setText(e.target.value)}
-      aria-label="Type something"
-    />
-    <div className="flex items-center">
-      <label htmlFor="image-upload" className="mr-2">
-        <FcAddImage className="h-10 w-10" />
-      </label>
+    <form onSubmit={handleSend} className="flex items-center justify-between bg-gray-100 h-16 px-4 border border-gray-400">
       <input
-        type="file"
-        id="image-upload"
-        accept="image/*"
-        onChange={(e) => setImg(e.target.files[0])}
-        className="hidden"
-        aria-label="Upload image"
+        type="text"
+        placeholder="Type something..."
+        className="flex-grow px-3 py-2 bg-transparent focus:outline-none focus:ring-2 focus:ring-blue-300 rounded-lg border border-gray-400"
+        value={text}
+        onChange={(e) => setText(e.target.value)}
+        aria-label="Type something"
       />
-      <button
-        className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg"
-        onClick={handleSend}
-        disabled={!text}
-        aria-label="Send message"
-      >
-        Send
-      </button>
-    </div>
-  </div>
-  
-
+      <div className="flex items-center">
+        <label htmlFor="image-upload" className="mr-2">
+          <FcAddImage className="h-10 w-10" />
+        </label>
+        <input
+          type="file"
+          id="image-upload"
+          accept="image/*"
+          onChange={(e) => setImg(e.target.files[0])}
+          className="hidden"
+          aria-label="Upload image"
+        />
+        <button
+          className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg"
+          type="submit"
+          disabled={!text}
+          aria-label="Send message"
+        >
+          Send
+        </button>
+      </div>
+    </form>
   )
 }
 

@@ -8,10 +8,10 @@ const Chat = () => {
   const { data } = useContext(ChatContext);
 
   return (
-    <div className='flex-[3] h-screen flex flex-col borde'>
+    <div className='flex-[3] h-screen flex flex-col'>
       {/* Navbar */}
       <div className='h-50px py-3 bg-slate-50 flex items-center justify-between px-2'>
-        <span className='text-lg font-bold'>{data.user?.displayName}</span>
+        <span className='text-lg font-bold capitalize'>{data.user?.displayName}</span>
         <div className='flex gap-4'>
           <BiUserPlus className='w-6 h-6' />
           <BiCameraMovie className='w-6 h-6' />
@@ -20,10 +20,10 @@ const Chat = () => {
       </div>
 
       {/* Messages */}
-      <div className='flex flex-col h-full justify-between'>
+      <div className='flex flex-col h-full justify-between overflow-y-scroll'>
         <Messages />
-        <Input />
       </div>
+      <Input />
     </div>
   )
 }
