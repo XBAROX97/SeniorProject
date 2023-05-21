@@ -3,7 +3,6 @@ import { db } from "../../FireBase";
 import { AuthContext } from "../../hooks/AuthContext";
 import { doc, onSnapshot } from "firebase/firestore";
 import { ChatContext } from '../../hooks/ChatContext';
-const message = "Hello sd sa ds  dsa"
 
 const Chats = () => {
   const [chats, setChats] = useState([]);
@@ -27,7 +26,7 @@ const Chats = () => {
   };
 
   return (
-    <div className='overflow-hidden hover:overflow-y-scroll w-full' tabIndex={1}>
+    <div className='overflow-hidden hover:overflow-y-scroll w-full mt-2' tabIndex={1}>
       {/* Load chats */}
       {Object.entries(chats)?.sort((a, b) => b[1].date - a[1].date).map((chat) => (
         <div key={chat[0]}
@@ -39,7 +38,7 @@ const Chats = () => {
           </div>
           <div className='w-full p-2 flex flex-col gap-2'>
             <p className='text-lg font-bold capitalize'>{chat[1].userInfo.displayName}</p>
-            <p className='text-slate-500 leading-5'>{message.length > 75 ? message.substring(0, 70) + "..." : message}</p>
+            <p className='text-slate-500 leading-5'>{chat[1].lastMessage?.text}</p>
           </div>
         </div>
       ))}
