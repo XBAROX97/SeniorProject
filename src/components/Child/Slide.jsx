@@ -1,15 +1,29 @@
-import Navbar from './Navbar'
-import Search from './Search'
-import Chats from './Chats'
+import Navbar from './Navbar.jsx';
+import Search from './Search.jsx';
+import Chats from './Chats.jsx';
+import React, { useState } from 'react';
 
 const Slide = () => {
-  return (
-    <div className='flex-1 max-h-full flex flex-col overflow-hidden bg-slate-50 h-screen border-l border-r sm:top-0'>
-      <Navbar />
-      <Search />
-      <Chats />
-    </div>
-  )
-}
+  const [showComponents, setShowComponents] = useState(false);
 
-export default Slide
+  const handleButtonClick = () => {
+    setShowComponents(!showComponents);
+  };
+
+  return (
+    <div className='w-96 h-screen bg-slate-50'>
+      <button className='fixed top-0 right-0 m-4 p-2 bg-gray-800 text-white rounded' onClick={handleButtonClick}>
+        {showComponents ? 'Hide' : 'Show'}
+      </button>
+      {showComponents && (
+        <>
+          <Navbar />
+          <Search />
+          <Chats />
+        </>
+      )}
+    </div>
+  );
+};
+
+export default Slide;

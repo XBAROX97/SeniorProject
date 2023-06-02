@@ -64,29 +64,29 @@ const useAuth = () => {
     };
     
     
-    const login = async (email, password) => {
-        try {
-            const userCredential = await auth.signInWithEmailAndPassword(email, password);
-            const userDoc = await firestore.collection('users').doc(userCredential.user.uid).get();
-            const user = userDoc.data();
-            setCurrentUser(user);
-            toast.success('Login successful!');
-        } catch (error) {
-            toast.error(`Login failed: ${error.message}`);
-        }
-    };
+    // const login = async (email, password) => {
+    //     try {
+    //         const userCredential = await auth.signInWithEmailAndPassword(email, password);
+    //         const userDoc = await firestore.collection('users').doc(userCredential.user.uid).get();
+    //         const user = userDoc.data();
+    //         setCurrentUser(user);
+    //         toast.success('Login successful!');
+    //     } catch (error) {
+    //         toast.error(`Login failed: ${error.message}`);
+    //     }
+    // };
 
-    const logout = async () => {
-        try {
-            await auth.signOut();
-            setCurrentUser(null);
-            toast.success('Logout successful!');
-        } catch (error) {
-            toast.error(`Logout failed: ${error.message}`);
-        }
-    };
+    // const logout = async () => {
+    //     try {
+    //         await auth.signOut();
+    //         setCurrentUser(null);
+    //         toast.success('Logout successful!');
+    //     } catch (error) {
+    //         toast.error(`Logout failed: ${error.message}`);
+    //     }
+    // };
 
-    return { currentUser, loading, register, login, logout };
+    return { currentUser, loading, register };
 };
 
 export default useAuth;

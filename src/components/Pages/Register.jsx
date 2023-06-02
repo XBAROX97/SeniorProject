@@ -60,9 +60,9 @@ const Register = () => {
   
   return (
 
-    <div className='h-screen relative flex over   '>
+    <div className='h-screen relative flex over overflow-auto   '>
       <div className="absolute inset-0 z-0">
-        <img className="w-full max-h-max object-cover" src={backgroundImage} alt="Background" />
+        <img className="w-full h-full object-cover" src={backgroundImage} alt="Background" />
         <div className="absolute inset-0 bg-black opacity-60"></div>
       </div>
 
