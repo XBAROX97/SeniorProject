@@ -4,6 +4,8 @@ import { toast } from 'react-hot-toast'
 import useAuth from '../../hooks/useAuth'
 import backgroundImage from './../../assets/backgroundImage.jpg'
 import { BiImageAdd } from 'react-icons/bi';
+import { RiDeleteBin2Fill } from 'react-icons/ri';
+
 
 const Register = () => {
   const { register, loading } = useAuth();
@@ -49,47 +51,47 @@ const Register = () => {
 
   return (
 
-    <div className='h-screen relative flex over   '>
-      <div className="absolute inset-0 z-0">
-        <img className="w-full max-h-max object-cover" src={backgroundImage} alt="Background" />
-        <div className="absolute inset-0 bg-black opacity-60"></div>
+    <div className="h-screen relative flex overflow-hidden">
+    <div className="absolute inset-0 z-0">
+      <img className="w-full h-full object-cover" src={backgroundImage} alt="Background" />
+      <div className="absolute inset-0 bg-black opacity-60"></div>
+    </div>
+
+    <form onSubmit={handleSubmit} className="relative z-10 m-auto bg-white bg-opacity-90 container p-8 max-w-[800px] shadow rounded-lg flex flex-col gap-4">
+    <h2 className="text-2xl font-bold mb-4">Register</h2>
+
+    <div className="flex flex-col sm:flex-row gap-2">
+      <div className="flex-1">
+        <label className="block text-gray-700 font-bold" htmlFor="firstName">
+          First Name
+        </label>
+        <input
+          className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          id="firstName"
+          name="firstName"
+          type="text"
+          placeholder="Enter your first name"
+          value={registerForm.firstName}
+          onChange={handleChange}
+        />
       </div>
+      <div className="flex-1">
+        <label className="block text-gray-700 font-bold" htmlFor="lastName">
+          Last Name
+        </label>
+        <input
+          className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          id="lastName"
+          name="lastName"
+          type="text"
+          placeholder="Enter your last name"
+          value={registerForm.lastName}
+          onChange={handleChange}
+        />
+      </div>
+    </div>
 
-      <form onSubmit={handleSubmit} className="relative z-10 m-auto bg-white bg-opacity-90 container p-8 max-w-[800px] shadow rounded-lg flex flex-col gap-4">
-        <h2 className="text-2xl font-bold mb-4">Register</h2>
-
-        <div className="flex flex-wrap gap-2">
-          <div className="flex-1">
-            <label className="block text-gray-700 font-bold" htmlFor="firstName">
-              First Name
-            </label>
-            <input
-              className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              id="firstName"
-              name="firstName"
-              type="text"
-              placeholder="Enter your first name"
-              value={registerForm.firstName}
-              onChange={handleChange}
-            />
-          </div>
-          <div className="flex-1">
-            <label className="block text-gray-700 font-bold" htmlFor="lastName">
-              Last Name
-            </label>
-            <input
-              className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              id="lastName"
-              name="lastName"
-              type="text"
-              placeholder="Enter your last name"
-              value={registerForm.lastName}
-              onChange={handleChange}
-            />
-          </div>
-        </div>
-
-        <div>
+    <div>
       <label className="block text-gray-700 font-bold mb-2" htmlFor="image">
         Upload an Image
       </label>
@@ -128,12 +130,13 @@ const Register = () => {
               type="button"
               onClick={clearImage}
             >
-              Remove 
+              <RiDeleteBin2Fill/>
             </button>
           </div>
         )}
       </div>
     </div>
+
 
 
         <div>
