@@ -4,7 +4,7 @@ import Chats from './Chats.jsx';
 import React, { useState } from 'react';
 
 const Slide = () => {
-  const [showComponents, setShowComponents] = useState(false);
+  const [showComponents, setShowComponents] = useState( );
 
   const handleButtonClick = () => {
     setShowComponents(!showComponents);
