@@ -74,28 +74,30 @@ const Search = () => {
   };
   return (
     <div className="flex flex-col items-center">
-      <div className="w-full max-w-sm mt-6">
-        <input
-          className="appearance-none block w-full px-4 py-3 leading-tight placeholder-gray-500 border rounded-md focus:outline-none focus:shadow-outline"
-          type="text"
-          placeholder="Find a user"
-          onKeyDown={handleKey}
-          onChange={(e) => setUsername(e.target.value)}
-          value={username}
-        />
-      </div>
-      {err && <span className="text-red-500 mt-2">User not found!</span>}
-      {user && (
-        <div onClick={handleSelect} className="w-full max-w-sm mt-2">
-          <div className="flex items-center bg-white rounded-md cursor-pointer shadow-md hover:shadow-lg">
+    <div className="w-full max-w-sm mt-6">
+      <input
+        className="appearance-none block w-full px-4 py-3 leading-tight placeholder-gray-500 border rounded-md focus:outline-none focus:shadow-outline"
+        type="text"
+        placeholder="Find a user"
+        onKeyDown={handleKey}
+        onChange={(e) => setUsername(e.target.value)}
+        value={username}
+      />
+    </div>
+    {err && <span className="text-red-500 mt-2">User not found!</span>}
+    {user && (
+      <div onClick={handleSelect} className="w-full max-w-sm mt-2">
+        <div className="flex items-center bg-white rounded-md cursor-pointer hover:bg-blue-200 shadow-md hover:shadow-lg">
             <img className="w-16 h-16 object-cover rounded-lg" src={user.photoURL} alt="" />
-            <div className="px-4 py-2">
-              <span className="text-gray-800 font-medium">{user.displayName}</span>
-            </div>
+          <div className="px-4 py-2">
+            <span className="text-gray-800 font-medium">{user.displayName}</span>
           </div>
         </div>
-      )}
-    </div>
+      </div>
+    )}
+  </div>
+  
+
 
   );
 };
