@@ -15,19 +15,16 @@ const useAuth = () => {
       try {
         setLoading(true);
         const res = await createUserWithEmailAndPassword(auth, data.email, data.password);
-        //Create a unique image name
         const date = new Date().getTime();
         const displayName = data.displayName;
         const storageRef = ref(storage, `${displayName + date}`);
         await uploadBytesResumable(storageRef, image).then(() => {
           getDownloadURL(storageRef).then(async (downloadURL) => {
             try {
-              //Update profile
               await updateProfile(res.user, {
                 displayName,
                 photoURL: downloadURL,
               });
-              //create user on firestore
               await setDoc(doc(db, "users", res.user.uid), {
                 uid: res.user.uid,
                 firstName: data.firstName,
@@ -37,7 +34,6 @@ const useAuth = () => {
                 photoURL: downloadURL,
               });
     
-              //create empty user chats on firestore
               await setDoc(doc(db, "userChats", res.user.uid), {});
               navigate("/");
               

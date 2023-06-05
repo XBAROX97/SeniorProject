@@ -12,11 +12,9 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setErr(false);
-    console.log(email, password)
     try {
       await signInWithEmailAndPassword(auth, email, password);
       navigate("/home")
-      console.log(email,password)
     } catch (err) {
       setErr(true);
     }

@@ -5,15 +5,9 @@ import { AuthContext } from "./hooks/AuthContext";
 import {  Navigate } from "react-router-dom";
 
 const App = () => {
-  const { currentUser } = useContext(AuthContext);
 
-  const ProtectedRoute = ({ children }) => {
-    if (!currentUser) {
-      return <Navigate to="/login" />;
-    }
 
-    return children
-  };
+ 
   return (
 
     

@@ -18,7 +18,7 @@ const Messages = () => {
   }, [data.chatId]);
   
   return (
-    <section className='px-4 py-2 flex gap-3 justify-end items-center'>
+    <section className='px-4 py-2  flex gap-3 justify-end items-center'>
       <div className="w-full">
       {messages.map((m) => (
         <Message message={m} key={m.id} />
