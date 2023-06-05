@@ -11,7 +11,7 @@ const Chat = () => {
     <div className='flex-[3] h-screen flex flex-col'>
       {/* Navbar */}
       <div className='h-50px py-3 bg-slate-50 flex items-center justify-between px-2'>
-        <span className='text-lg font-bold capitalize'>{data.user?.displayName}</span>
+        <span className='text-lg  flex justify-center container font-bold capitalize'>{data.user?.displayName}</span>
         <div className='flex gap-4'>
           <BiUserPlus className='w-6 h-6' />
           <BiCameraMovie className='w-6 h-6' />
