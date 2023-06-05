@@ -74,68 +74,40 @@ const Input = () => {
 
   return (
     <form onSubmit={handleSend} className="flex items-center justify-between bg-gray-100 h-16 px-4 border border-gray-400">
-      <input
-        type="text"
-        placeholder="Type something..."
-        className="flex-grow px-3 py-2 bg-transparent focus:outline-none focus:ring-2 focus:ring-blue-300 rounded-lg border border-gray-400"
-        value={text}
-        onChange={(e) => setText(e.target.value)}
-        aria-label="Type something"
-      />
-      <div className="flex items-center">
-        <label htmlFor="image-upload" className="mr-2 cursor-pointer">
-          <FcAddImage className="h-10 w-10" />
-        </label>
-        <input
-          type="file"
-          id="image-upload"
-          accept="image/*"
-          onChange={(e) => setImg(e.target.files[0])}
-          className="hidden"
-          aria-label="Upload image"
-        />
-        <button
-          className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg"
-          type="submit"
-          disabled={!text}
-          aria-label="Send message"
-        >
-          Send
-        </button>
-      </div>
-    </form>
-  )
-}
-
-export default Input
-
-
-{/* <div className="flex items-center justify-between bg-slate-50 h-16 px-4 rounded-lg border border-gray-400">
     <input
       type="text"
       placeholder="Type something..."
       className="flex-grow px-3 py-2 bg-transparent focus:outline-none focus:ring-2 focus:ring-blue-300 rounded-lg border border-gray-400"
       value={text}
       onChange={(e) => setText(e.target.value)}
+      aria-label="Type something"
     />
-    <div className="flex items-center space-x-4">
-      <label htmlFor="image-upload" className="cursor-pointer">
-        <FcAddImage className="text-gray-600 hover:text-blue-500" />
+    <div className="flex items-center">
+      <label htmlFor="image-upload" className="mr-2 cursor-pointer">
+        <FcAddImage className="h-10 w-10" />
       </label>
       <input
         type="file"
         id="image-upload"
-        className="hidden"
+        accept="image/*"
         onChange={(e) => setImg(e.target.files[0])}
+        className="hidden"
+        aria-label="Upload image"
       />
       <button
         className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg"
-        onClick={handleSend}
+        type="submit"
+        disabled={!text}
+        aria-label="Send message"
       >
         Send
       </button>
-      <button className="text-gray-400 hover:text-gray-600 focus:outline-none">
-        <FiSmile className="text-xl" />
-      </button>
     </div>
-  </div> */}
+  </form>
+  
+  )
+}
+
+export default Input
+
+
